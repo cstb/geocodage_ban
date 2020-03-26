@@ -39,8 +39,7 @@ sudo mkdir -p addok/addok-data traefik
 
 echo "Téléchargement de la dernière version des données BAN"
 wget https://adresse.data.gouv.fr/data/ban/adresses-odbl/latest/addok/addok-france-bundle.zip
-sudo unzip -d /addok/addok-data/ /tmp/addok-latest.zip
-rm /tmp/addok-latest.zip
+sudo unzip -d addok/addok-data addok-france-bundle.zip
 
 echo "Téléchargement du script de lancement de l'instance de géocodage"
 chmod u+x ~/start.sh
