@@ -5,6 +5,7 @@ sudo apt-get update
 sudo apt-get install git
 git clone https://github.com/geoffreyaldebert/geocodage_ban.git
 cd geocodage_ban
+chmod +x init.sh
 sudo ./init.sh
 ```
 
