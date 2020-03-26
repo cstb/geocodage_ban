@@ -1,9 +1,11 @@
 #!/bin/bash
+sudo apt-get update
+sudo apt-get install git
+sudo git clone https://github.com/geoffreyaldebert/geocodage_ban.git
 
 echo "Script de préparation du serveur pour le déploiement d'une instance de géocodage"
 
 echo "Téléchargement d'un script de vérification de l'environnement"
-wget https://raw.githubusercontent.com/moby/moby/master/contrib/check-config.sh
 chmod +x check-config.sh
 echo "Vérification que OVERLAY FS soit bien activé : "
 ./check-config.sh | grep CONFIG_OVERLAY_FS
@@ -21,6 +23,7 @@ sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/d
 echo "Mise à jour des dépôts et installation de docker"
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo apt-get install docker-compose
 
 echo "Ajouter le service au démarrage"
 sudo systemctl enable docker
@@ -34,22 +37,14 @@ docker version
 docker info
 
 echo "Création des répertoires pour l'instance de géocodage"
-sudo mkdir -p /opt/geocoding/
-cd /opt/geocoding/
 sudo mkdir -p addok/addok-data traefik
 
 echo "Téléchargement de la dernière version des données BAN"
-wget https://adresse.data.gouv.fr/data/ban/adresses/latest/addok/addok-france-bundle.zip -O /tmp/addok-latest.zip
-sudo unzip -d /opt/geocoding/addok/addok-data /tmp/addok-latest.zip
+wget https://adresse.data.gouv.fr/data/ban/adresses-odbl/latest/addok/addok-france-bundle.zip
+sudo unzip -d /addok/addok-data/ /tmp/addok-latest.zip
 rm /tmp/addok-latest.zip
 
-echo "Téléchargement des docker-compose personnalisés Arcep"
-sudo wget -O ./addok/addok-compose.yml https://raw.githubusercontent.com/ARCEP-dev/geocodage_ban/master/addok/addok-compose.yml
-sudo wget -O ./traefik/traefik-compose.yml https://raw.githubusercontent.com/ARCEP-dev/geocodage_ban/master/traefik/traefik-compose.yml
-sudo wget -O ./traefik/traefik.toml https://raw.githubusercontent.com/ARCEP-dev/geocodage_ban/master/traefik/traefik.toml
-
 echo "Téléchargement du script de lancement de l'instance de géocodage"
-wget -O ~/start.sh https://raw.githubusercontent.com/ARCEP-dev/geocodage_ban/master/start.sh
 chmod u+x ~/start.sh
 
 echo "Redémarrage du serveur"
