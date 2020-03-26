@@ -10,7 +10,7 @@ echo "Vérification que OVERLAY FS soit bien activé : "
 ./check-config.sh | grep CONFIG_OVERLAY_FS
 
 echo "Mise à jour des dépôts et installations"
-sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common htop unzip python3
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common htop unzip python3 htop
 
 echo "Ajout du dépôt docker aux sources"
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
