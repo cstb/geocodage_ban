@@ -3,7 +3,7 @@ version: '3'
 services:
 
   proxy:
-    image: traefik:latest
+    image: traefik:1.7.16
     command: --docker --docker.domain=docker.localhost
     restart: unless-stopped
     networks:
