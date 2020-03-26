@@ -1,6 +1,5 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install git
 sudo git clone https://github.com/geoffreyaldebert/geocodage_ban.git
 
 echo "Script de préparation du serveur pour le déploiement d'une instance de géocodage"
@@ -11,7 +10,6 @@ echo "Vérification que OVERLAY FS soit bien activé : "
 ./check-config.sh | grep CONFIG_OVERLAY_FS
 
 echo "Mise à jour des dépôts et installations"
-sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common htop unzip python3
 
 echo "Ajout du dépôt docker aux sources"
